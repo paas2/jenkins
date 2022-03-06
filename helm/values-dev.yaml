@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: kadirzade/sh2-jenkins
-  tag: v2
+  tag: v4
   pullPolicy: IfNotPresent
 
 service:
