@@ -27,7 +27,7 @@ spec:
       volumes:
         - name: jenkins-config-vol
           configMap:
-            name: {{ include "jenkins.fullname" . }}-cm-v1
+            name: {{ include "jenkins.fullname" . }}-cm-v2
             defaultMode: 0777     
       serviceAccountName: {{ include "jenkins.serviceAccountName" . }}
       securityContext:
