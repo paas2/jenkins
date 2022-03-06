@@ -14,11 +14,11 @@ ingress:
 
 resources: 
   limits:
-    cpu: 120m
-    memory: 300Mi
+    cpu: 300m
+    memory: 2Gi
   requests:
-    cpu: 100m
-    memory: 256Mi
+    cpu: 300m
+    memory: 2Gi
 
 serviceAccount:
   create: true
