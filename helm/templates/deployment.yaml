@@ -49,7 +49,7 @@ spec:
               mountPath:  {{ include "jenkins.config" . }} 
               
             - name: jenkins-jobs-vol
-              mountPath:  usr/share/jenkins/ref/jobs/banking/config.xml 
+              mountPath:  usr/share/jenkins/ref/jobs/banking 
 
           env:                  
             - name: CASC_JENKINS_CONFIG
