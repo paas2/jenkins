@@ -32,6 +32,13 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
+  
+env: 
+  values:
+    - name: CASC_JENKINS_CONFIG
+      value: /var/jenkins_home/casc_configs/  
+
+
 # nodeSelector: {}
 
 # tolerations: []
