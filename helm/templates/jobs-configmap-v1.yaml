@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "jenkins.fullname" . }}-jobscm-v1
+data:
+  config.xml: |-
+    <?xml version='1.1' encoding='UTF-8'?>
+    <jenkins.branch.OrganizationFolder plugin="branch-api@2.7.0">
+      <actions/>
+      <description></description>
+      <displayName>banking</displayName>
+      <properties>
+        <jenkins.branch.OrganizationChildHealthMetricsProperty>
+          <templates>
+            <com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric plugin="cloudbees-folder@6.708.ve61636eb_65a_5">
+              <nonRecursive>false</nonRecursive>
+            </com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric>
+          </templates>
+        </jenkins.branch.OrganizationChildHealthMetricsProperty>
+        <jenkins.branch.OrganizationChildOrphanedItemsProperty>
+          <strategy class="jenkins.branch.OrganizationChildOrphanedItemsProperty$Inherit"/>
+        </jenkins.branch.OrganizationChildOrphanedItemsProperty>
+        <jenkins.branch.OrganizationChildTriggersProperty>
+          <templates>
+            <com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger plugin="cloudbees-folder@6.708.ve61636eb_65a_5">
+              <spec>H H/4 * * *</spec>
+              <interval>86400000</interval>
+            </com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger>
+          </templates>
+        </jenkins.branch.OrganizationChildTriggersProperty>
+        <jenkins.branch.NoTriggerOrganizationFolderProperty>
+          <branches>.*</branches>
+        </jenkins.branch.NoTriggerOrganizationFolderProperty>
+      </properties>
+      <folderViews class="jenkins.branch.OrganizationFolderViewHolder">
+        <owner reference="../.."/>
+      </folderViews>
+      <healthMetrics/>
+      <icon class="jenkins.branch.MetadataActionFolderIcon">
+        <owner class="jenkins.branch.OrganizationFolder" reference="../.."/>
+      </icon>
+      <orphanedItemStrategy class="com.cloudbees.hudson.plugins.folder.computed.DefaultOrphanedItemStrategy" plugin="cloudbees-folder@6.708.ve61636eb_65a_5">
+        <pruneDeadBranches>true</pruneDeadBranches>
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>-1</numToKeep>
+        <abortBuilds>false</abortBuilds>
+      </orphanedItemStrategy>
+      <triggers>
+        <com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger plugin="cloudbees-folder@6.708.ve61636eb_65a_5">
+          <spec>H H/4 * * *</spec>
+          <interval>86400000</interval>
+        </com.cloudbees.hudson.plugins.folder.computed.PeriodicFolderTrigger>
+      </triggers>
+      <disabled>false</disabled>
+      <navigators>
+        <org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator plugin="github-branch-source@2.11.4">
+          <repoOwner>paas2-bnk</repoOwner>
+          <apiUri>https://api.github.com</apiUri>
+          <credentialsId>GitHub</credentialsId>
+          <traits>
+            <org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait>
+              <strategyId>1</strategyId>
+            </org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait>
+            <org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait>
+              <strategyId>1</strategyId>
+            </org.jenkinsci.plugins.github__branch__source.OriginPullRequestDiscoveryTrait>
+            <org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait>
+              <strategyId>1</strategyId>
+              <trust class="org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait$TrustPermission"/>
+            </org.jenkinsci.plugins.github__branch__source.ForkPullRequestDiscoveryTrait>
+          </traits>
+        </org.jenkinsci.plugins.github__branch__source.GitHubSCMNavigator>
+      </navigators>
+      <projectFactories>
+        <org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory plugin="workflow-multibranch@711.vdfef37cda_816">
+          <scriptPath>Jenkinsfile</scriptPath>
+        </org.jenkinsci.plugins.workflow.multibranch.WorkflowMultiBranchProjectFactory>
+      </projectFactories>
+      <buildStrategies/>
+      <strategy class="jenkins.branch.DefaultBranchPropertyStrategy">
+        <properties class="empty-list"/>
+      </strategy>
+    </jenkins.branch.OrganizationFolder>                 

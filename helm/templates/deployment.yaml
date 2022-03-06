@@ -27,8 +27,14 @@ spec:
       volumes:
         - name: jenkins-config-vol
           configMap:
-            name: {{ include "jenkins.fullname" . }}-cm-v2
-            defaultMode: 0777     
+            name: {{ include "jenkins.fullname" . }}-jenkinscm-v1
+            defaultMode: 0777   
+
+        - name: jenkins-jobs-vol
+          configMap:
+            name: {{ include "jenkins.fullname" . }}-jobscm-v1
+            defaultMode: 0777           
+
       serviceAccountName: {{ include "jenkins.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
@@ -40,7 +46,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: jenkins-config-vol
-              mountPath:  {{ include "jenkins.config" . }}  
+              mountPath:  {{ include "jenkins.config" . }} 
+              
+            - name: jenkins-jobs-vol
+              mountPath:  usr/share/jenkins/ref/jobs/banking/config.xml 
+
           env:                  
             - name: CASC_JENKINS_CONFIG
               value: {{ include "jenkins.config" . }}     
