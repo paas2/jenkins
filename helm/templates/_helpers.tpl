@@ -62,7 +62,7 @@ Create the name of the service account to use
 {{- end }}
 
 {{/*
-Selector labels
+Jenkins Config
 */}}
 {{- define "jenkins.config" -}}
 {{- default "/var/jenkins_home/casc_configs" }}

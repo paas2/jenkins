@@ -40,20 +40,13 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: jenkins-config-vol
-              mountPath:  {{- include "jenkins.config" . }}  
-          env:
-          
-          {{- if .Values.env.values -}}
-          {{- range .Values.env.values }}
-            - name: {{ .name }}
-              value: {{ .value | quote }}
-          {{- end -}}
-          {{- end -}}
-
+              mountPath:  {{ include "jenkins.config" . }}  
+          env:                  
             - name: CASC_JENKINS_CONFIG
-              value: {{- include "jenkins.config" . }}  
-              # value: {{ .value | quote }}       
-                    
+              value: {{ include "jenkins.config" . }}     
+
+          #@TODO:loop through the env values    
+              
           ports:
             - name: http
               containerPort: 8080

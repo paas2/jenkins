@@ -1,0 +1,61 @@
+replicaCount: 1
+
+image:
+  repository: kadirzade/sh2-jenkins
+  tag: v4
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+
+resources: 
+  limits:
+    cpu: 300m
+    memory: 2Gi
+  requests:
+    cpu: 300m
+    memory: 2Gi
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""    
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+  
+env: {}
+  # values:
+  #   - name: CASC_JENKINS_CONFIG
+  #     value: /var/jenkins_home/casc_configs/  
+
+
+# nodeSelector: {}
+
+# tolerations: []
+
+# affinity: {}
+
+# probes:
+#   liveness:
+#     path: /hc/live
+#     initialDelaySeconds: 10
+#     periodSeconds: 30
+#     port: 80
+#   readiness:
+#     path: /hc/ready
+#     timeoutSeconds: 5
+#     initialDelaySeconds: 30
+#     periodSeconds: 10
+#     failureThreshold: 4
+#     successThreshold: 1
+#     port: 80
