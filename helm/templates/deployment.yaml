@@ -40,7 +40,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: jenkins-config-vol
-              mountPath:  {{- include "jenkins.config" }}  
+              mountPath:  {{- include "jenkins.config" . }}  
           env:
           
           {{- if .Values.env.values -}}
@@ -51,7 +51,7 @@ spec:
           {{- end -}}
 
             - name: CASC_JENKINS_CONFIG
-              value: {{- include "jenkins.config" }}  
+              value: {{- include "jenkins.config" . }}  
               # value: {{ .value | quote }}       
                     
           ports:
