@@ -4,5 +4,5 @@ metadata:
   name: {{ include "jenkins.fullname" . }}-cm
 data:
   jenkins-config.yaml: |-
-{{ .Files.Get "jenkins-config.yaml" | indent 4}}
+{{ .Files.Get "_jenkins-config.yaml" | indent 4}}
 
