@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ include "jenkins.fullname" . }}-cm
-data:
-  jenkins-config.yaml: |-
-{{ .Files.Get "_jenkins-config.yaml" | indent 4}}
-
